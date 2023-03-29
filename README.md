@@ -1,29 +1,33 @@
 # InvertedPendulum
-Intro to component here
+This Robocomp component implements the control system of an inverted pendulum.
 
 
-## Configuration parameters
+## Config parameters
 As any other component, *InvertedPendulum* needs a configuration file to start. In
 ```
 etc/config
 ```
-you can find an example of a configuration file. We can find there the following lines:
+In this case, we can find there the following lines:
 ```
-EXAMPLE HERE
+CommonBehavior.Endpoints=tcp -p 10000
+
+# Proxies for required interfaces
+IMUProxy = imu:tcp -h localhost -p 10005
+JointMotorSimpleProxy = jointmotorsimple:tcp -h localhost -p 10006
+
+
+
+InnerModelPath = innermodel.xml
+
+Ice.Warn.Connections=0
+Ice.Trace.Network=0
+Ice.Trace.Protocol=0
+Ice.MessageSizeMax=20004800
 ```
 
 ## Starting the component
-To avoid changing the *config* file in the repository, we can copy it to the component's home directory, so changes will remain untouched by future git pulls:
+To start the component, you'll just have to execute the following line:
 
 ```
-cd <InvertedPendulum's path> 
-```
-```
-cp etc/config config
-```
-
-After editing the new config file we can run the component:
-
-```
-bin/InvertedPendulum config
+bin/InvertedPendulum etc/config
 ```
