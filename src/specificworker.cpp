@@ -42,18 +42,17 @@ bool SpecificWorker::setParams(RoboCompCommonBehavior::ParameterList params)
 {
 //	THE FOLLOWING IS JUST AN EXAMPLE
 //	To use innerModelPath parameter you should uncomment specificmonitor.cpp readConfig method content
-//	try
-//	{
+	try
+	{
+        kd = std::stof(params.at("kd").value);
+        ki = std::stof(params.at("ki").value);
+        kp = std::stof(params.at("kp").value);
+
 //		RoboCompCommonBehavior::Parameter par = params.at("InnerModelPath");
 //		std::string innermodel_path = par.value;
 //		innerModel = std::make_shared(innermodel_path);
-//	}
-//	catch(const std::exception &e) { qFatal("Error reading config params"); }
-
-
-
-
-
+	}
+	catch(const std::exception &e) { qFatal("Error reading config params"); }
 
 	return true;
 }
@@ -70,7 +69,6 @@ void SpecificWorker::initialize(int period)
 	{
 		timer.start(Period);
 	}
-
 }
 
 void SpecificWorker::compute()
@@ -99,15 +97,15 @@ void SpecificWorker::compute()
     integral = integral + (error * deltaTime);
     derivate = (error - previousError) / deltaTime;
 
-    kd = 0.125 * kp * Td; // Siendo Td el tiempò de derivacion 
-    ki = ;
+   // kd = 0.125 * kp * Td; // Siendo Td el tiempo de derivacion
+   // ki = ;
 
     float output = kp * error + ki * integral + kd * derivate;
-    if(output < 0.3 && output > -0.3)
+  /*  if(output < 0.2 && output > -0.2)
     {
-        output = (output > 0) ? 0.3 : -0.3;
+        output = (output > 0) ? 0.2 : -0.2;
     }
-
+*/
     cout << "## DEBUG ##" << endl;
 
     cout << "pitch: " << pitch << endl;
@@ -115,7 +113,7 @@ void SpecificWorker::compute()
     cout << "integral: " << integral << endl;
     cout << "derivate: " << derivate << endl;
 
-    cout << "###########" << endl;
+    cout << "#############" << endl;
 
     goal_velocity.velocity = output;
 
@@ -123,7 +121,6 @@ void SpecificWorker::compute()
 
     if(!isnan(output))
     {
-
         jointmotorsimple_proxy->setVelocity("", goal_velocity);
     }
 

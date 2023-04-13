@@ -57,9 +57,9 @@ private:
     float derivate = 0;
     float error = 0;
     float previousError = 0;
-    float kd = 0;
-    float ki = 0;
-    float kp = 16;
+    float kd;
+    float ki;
+    float kp;
 
     RoboCompJointMotorSimple::MotorGoalVelocity goal_velocity;
 
