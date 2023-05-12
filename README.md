@@ -15,7 +15,10 @@ CommonBehavior.Endpoints=tcp -p 10000
 IMUProxy = imu:tcp -h localhost -p 10005
 JointMotorSimpleProxy = jointmotorsimple:tcp -h localhost -p 10006
 
-
+# PID values
+kp=16
+ki=15
+kd=5
 
 InnerModelPath = innermodel.xml
 
