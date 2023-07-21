@@ -5,10 +5,7 @@ Component InvertedPendulum
 {
     Communications
     {
-        //implements interfaceName;
         requires IMU, JointMotorSimple;
-        //subscribesTo topicToSubscribeTo;
-        //publishes JointMotorSimple;
     };
     language Cpp11;
 };
